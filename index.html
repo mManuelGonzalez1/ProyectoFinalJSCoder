@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de servicio Overhaul Service</title>
+</head>
+<body>
+<header></header>
+<main>
+    <form action="">
+
+        <fieldset><!--Informaccion del cliente-->
+            <legend>Informacion del cliente</legend>
+            <label for="NombreCliente">Nombre del cliente:</label>
+            <select name="NombreCliente" id="NombreCliente" required >
+                <option value="0" disabled selected>Selecciona un cliente</option>
+                <option value="1">Solistica</option>
+                <option value="2">DHL</option>
+                <option value="3">Canpack</option>
+            </select><br>
+            <label for="NombrePersona">Nombre Persona:</label>
+            <input type="text" name="NombrePersona" id="NombrePersona" required><br>
+            <label for="DireccionCliente">Dirección del cliente:</label>
+            <input type="text" name="DireccionCliente" id="DireccionCliente" required><br>
+            <label for="NumeroTelefono">Numero de telefono:</label>
+            <input type="number" name="NumeroTelefono" id="NumeroTelefono" required><br>
+            <label for="Ciudad">Ciudad:</label>
+            <input type="text" name="Ciudad" id="Ciudad" required ><br>
+            <label for="NumeroBodega">Numero de bodega:</label>
+            <input type="number" name="NumeroBodega" id="NumeroBodega" required><br>
+        </fieldset>
+
+        <fieldset><!--Datos del montacarga-->
+            <legend>Datos de Montacarga</legend>
+            <label for="Marca">Marca:</label>
+            <select name="Marca" id="Marca" required >
+                <option value="0" disabled selected>Selecciona una marca</option>
+                <option value="1">Hyster</option>
+                <option value="2">Jungheinrich </option>
+                <option value="3">Raymond</option>
+                <option value="4">Still</option>
+                <option value="5">Toyota</option>
+                <option value="6">Yale</option>
+                <option value="7">BYD</option>
+                <option value="8">EP</option>
+            </select><br>
+            <label for="Modelo">Modelo:</label>
+            <input type="text" name="Modelo" id="Modelo" required><br>
+            <label for="serie">Serie:</label>
+            <input type="text" name="serie" id="serie" required><br>
+            <label for="Horometro">Horometro:</label>
+            <input type="number" name="Horometro" id="Horometro" required><br>
+            <label for="año">Año de fabricacion:</label>
+            <input type="number" name="año" id="año" required><br>
+        </fieldset>
+
+        <fieldset><!--Datos de servicio-->
+            <legend>Datos de servicio</legend>
+            <label for="fecha">Fecha:</label>
+            <input type="date" name="fecha" id="fecha" required><br>
+            <label for="time">Hora de inicio:</label>
+            <input type="time" name="time" id="time-inicial" required><br>
+            <label for="time">Hora de finalizacion:</label>
+            <input type="time" name="time" id="time-final" required><br>
+            <label for="numeroConsecutivo">Consecutivo:</label>
+            <input type="number" name="numeroConsecutivo" id="numeroConsecutivo" required><br>
+            <label for="tipoServicio">Tipo de servicio:</label>
+            <select name="tipoServicio" id="tipoServicio" required >
+                <option value="0" disabled selected>Selecciona un tipo</option>
+                <option value="1">Mantenimiento Correctivo</option>
+                <option value="2">Mantenimiento Preventivo</option>
+                <option value="3">Diagnostico</option>
+                <option value="4">Entrega de equipo</option>
+                <option value="5">Retiro de equipo </option>
+                <option value="6">Remision</option>
+            </select><br>
+        </fieldset>
+
+        <section class="entrega" id="entrega" style="display: none;">
+            <h2>Servicio de Entrega de equipo</h2>
+            <table><!--Informacion Mastil-->
+                <caption>Informacion mastil</caption>
+                <thead>
+                    <th>Item a inspeccionar</th>
+                    <th>Estado (bueno/Regular/Malo)</th>
+                    <th>Observaciones</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mangueras posicionadas y en buen estado</td>
+                        <td>
+                             <select name="estadosMangueras" id="estadosMangueras" required> >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesMangueras" id="observacionesMangueras" ></td>
+                    </tr>
+                    <tr>
+                        <td>Cilindros funcionando correctamente</td>
+                        <td>
+                        <select name="estadosCilindros" id="estadosCilindros" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesCilindros" id="observacionesCilindros"></td>
+                    </tr>
+                    <tr>
+                        <td>Estado fisico del mastil</td>
+                        <td><select name="estadosEstadoMastil" id="estadosEstadoMastil" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select></td>
+                        <td><input type="text" name="observacionesEstadoMastil" id="observacionesEstadoMastil"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table><!--Informacion Chasis-->
+                <caption>Informacion Chasis</caption>
+                <thead>
+                    <th>Item a inspeccionar</th>
+                    <th>Estado (bueno/Regular/Malo)</th>
+                    <th>Observaciones</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pernos de las ruedas ajustados</td>
+                        <td>
+                            <select name="estadosPernosRuedas" id="estadosPernosRuedas" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select></td>
+                        <td><input type="text" name="observacionesPernosRuedas" id="observacionesPernosRuedas"></td>
+                    </tr>
+                    <tr>
+                        <td>Operacion parada de emergencia</td>
+                        <td>
+                            <select name="estadosParadaEmergencia" id="estadosParadaEmergencia" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesParadaEmergencia" id="observacionesParadaEmergencia"></td>
+                    </tr>
+                    <tr>
+                        <td>Operacion de pedales</td>
+                        <td>
+                        <select name="estadosPedales" id="estadosPedales" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesEstadoPedales" id="observacionesEstadoPedales"></td>
+                    </tr>
+                    <tr>
+                        <td>Niveles de aceites adecuados</td>
+                        <td>
+                            <select name="estadosNivelesAceite" id="estadosNivelesAceite" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesNivelesAceite" id="observacionesNivelesAceite"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table><!--Informacion General-->
+                <caption>Informacion General equipo</caption>
+                <thead>
+                    <th>Item a inspeccionar</th>
+                    <th>Estado (bueno/Regular/Malo)</th>
+                    <th>Observaciones</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pintura y estado general es adecuada</td>
+                        <td>
+                             <select name="estadosEstadoGeneral" id="estadosEstadoGeneral" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesMangueras" id="observacionesEstadoGeneral"></td>
+                    </tr>
+                    <tr>
+                        <td>Conexiones electricas firmes y apretadas</td>
+                        <td>
+                        <select name="estadosConexionesElectricas" id="estadosConexionesElectricas" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesConexionesElectricas" id="observacionesConexionesElectricas"></td>
+                    </tr>   
+                    <tr>
+                            <td>Funcionamiento de luces y alarmas</td>
+                            <td><select name="estadosLucesAlarmas" id="estadosLucesAlarmas" required >
+                                <option value="0" disabled selected>Selecciona un estado</option>
+                                <option value="1">Bueno</option>
+                                <option value="2">Regular</option>
+                                <option value="3">Malo</option>
+                            </select></td>
+                            <td><input type="text" name="observacionesLucesAlarmas" id="observacionesLucesAlarmas"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Ejemplo para la foto de la batería -->
+        <label for="fotoMontacarga">Foto del Montacarga:</label>
+        <input type="file" id="fotoMontacarga" name="fotoMontacarga[]" accept="image/*" multiple aria-label="Subir fotos del montacarga" required>
+        <article id="contenedorFotosMontacarga"></article>
+
+            <table><!--Informacion cargador-->
+                <caption>Informacion del cargador </caption>
+                <thead>
+                    <th>Item a inspeccionar</th>
+                    <th>Estado (bueno/Regular/Malo)</th>
+                    <th>Observaciones</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>El sistema de carga de la bateria esta en optimas condiciones</td>
+                        <td>
+                             <select name="estadosSistemaCarga" id="estadosSistemaCarga" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesSistemaCarga" id="observacionesSistemaCarga"></td>
+                    </tr>
+                    <tr>
+                        <td>Estructura fisica del cargador</td>
+                        <td>
+                        <select name="estadosEstructuraCargador" id="estadosEstructuraCargador" required>
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesEstructuraCargador" id="observacionesEstructuraCargador"></td>
+                    </tr>
+                    <tr>
+                        <td>Entrega de equipo con clavija de seguridad</td>
+                        <td><select name="estadosEntregaClavija" id="estadosEntregaClavija" required>
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Si</option>
+                            <option value="2">No</option>
+                        </select></td>
+                        <td><input type="text" name="observacionesEntregaClavija" id="observacionesEntregaClavija"></td>
+                    </tr>
+                </tbody>
+            </table>
+        <label for="fotoCargador">Foto del Cargador:</label>
+        <input type="file" id="fotoCargador" name="fotoCargador[]" accept="image/*" multiple aria-label="Subir fotos del cargador" required>
+        <article id="contenedorFotosCargador"></article>
+
+        <table><!--Informacion bateria-->
+                <caption>Informacion de la bateria </caption>
+                <thead>
+                    <th>Item a inspeccionar</th>
+                    <th>Estado (bueno/Regular/Malo)</th>
+                    <th>Observaciones</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bateria cargada y probada</td>
+                        <td>
+                             <select name="estadosSistemaCarga" id="estadosSistemaCarga" required>
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Si</option>
+                            <option value="2">No</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesSistemaCarga" id="observacionesSistemaCarga"></td>
+                    </tr>
+                    <tr>
+                        <td>Nivel de electrolito adecuado</td>
+                        <td>
+                        <select name="estadoElectrolito" id="estadoElectrolito" required>
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesElectrolito" id="observacionesElectrolito"></td>
+                    </tr>
+                    <tr>
+                        <td>Apariencia general de la bateria</td>
+                        <td><select name="estadosAparienciaBateria" id="estadosAparienciaBateria" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select></td>
+                        <td><input type="text" name="observacionesAparienciaBateria" id="observacionesAparienciaBateria"></td>
+                    </tr>
+                </tbody>
+        </table>
+        <label for="fotoBateria">Foto de la Bateria:</label>
+        <input type="file" id="fotoBateria" name="fotoBateria[]" accept="image/*" multiple aria-label="Subir fotos de la bateria" required>
+        <article id="contenedorFotosBateria"></article>
+            
+        </section><!--Fin seccion tipo servicio Entrega-->
+        
+        <section class="preventivo" id="preventivo" style="display: none;">
+            <h1> Mantenimiento preventivo</h1>
+            <table>
+                <caption>Inspeccion Mantenimiento preventivo</caption>
+                <thead>
+                    <th>Item a inspeccionar</th>
+                    <th>Estado</th>
+                    <th>Observaciones</th>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>Estado de la bateria</td>
+                        <td>
+                             <select name="estadoBateriaPreventivo" id="estadoBateriaPreventivo" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>  
+                    </tr>
+                    <tr>
+                         <td>Nivel de electrolito</td>
+                         <td>
+                            <select name="estadoElectrolitoPreventivo" id="estadoElectrolitoPreventivo" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">A nivel</option>
+                            <option value="2">Por encima del nivel</option>
+                            <option value="3">Por debajo del Nivel</option>
+                         </td>
+                    </tr>
+                    <tr>
+                         <td>Nivel de Aceite hidraulico</td>
+                         <td>
+                            <select name="nivelAceiteHidraulicoPreventivo" id="nivelAceiteHidraulicoPreventivo" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">A nivel</option>
+                            <option value="2">Por encima del nivel</option>
+                            <option value="3">Por debajo del Nivel</option>
+                         </td>
+                    </tr>
+                    <tr>
+                        <td>Estado de Aceite hidraulico</td>
+                         <td>
+                            <select name="estadoAceiteHidraulicoPreventivo" id="estadoAceiteHidraulicoPreventivo" required>
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Optimo</option>
+                            <option value="2">Para cambio</option>
+                         </td>
+                    </tr>
+                    <tr>
+                        <td>Estado de Aceite transmision</td>
+                         <td>
+                            <select name="estadoAceiteTransmisionPreventivo" id="estadoAceiteTransmisionPreventivo" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Optimo</option>
+                            <option value="2">Para cambio</option>
+                         </td>
+                    </tr>
+                    <tr>
+                        <td>¿Fugas de aceite presentadas?</td>
+                         <td>
+                            <select name="fugasAceite" id="fugasAceite" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Sí</option>
+                            <option value="2">No</option>
+                         </td>
+                         <td><input type="text" name="observacionesFugas" id="observacionesFugas"></td>
+                    </tr>
+                    <tr>
+                        <td>Estado de mangueras</td>
+                         <td>
+                            <select name="estadoMangueras" id="estadoMangueras" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Optimo</option>
+                            <option value="2">Con leve desgaste</option>
+                            <option value="3">Con desgaste moderado</option>
+                            <option value="4">Para cambio</option>
+                         </td>
+                         <td><input type="text" name="observacionesMangueras" id="observacionesMangueras"></td>
+                    </tr>
+                        <tr>
+                            <td>Estado de cilindros</td>
+                            <td>
+                                <select name="estadoCilindros" id="estadoCilindros" required >
+                                <option value="0" disabled selected>Selecciona un estado</option>
+                                <option value="1">Optimo</option>
+                                <option value="2">Con fugas</option>
+                            </td>
+                            <td><input type="text" name="observacionesCilindros" id="observacionesCilindros"></td>
+                        </tr>
+                        <tr>
+                            <td>Estado de deslizadores del carro</td>
+                            <td>
+                                <select name="estadoDeslizadores" id="estadoDeslizadores" required >
+                                <option value="0" disabled selected>Selecciona un estado</option>
+                                <option value="1">Optimo</option>
+                                <option value="2">Con desgaste</option>
+                                <option value="3">Para cambio</option>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Estado de cadenas</td>
+                            <td>
+                                <select name="estadoCadenas" id="estadoCadenas" required >
+                                <option value="0" disabled selected>Selecciona un estado</option>
+                                <option value="1">Optimo</option>
+                                <option value="2">Con desgaste</option>
+                                <option value="3">Para cambio</option>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Estado de ruedas</td>
+                            <td>
+                                <select name="estadoRuedas" id="estadoRuedas" required >
+                                <option value="0" disabled selected>Selecciona un estado</option>
+                                <option value="1">Recubrimiento Optimo</option>
+                                <option value="2">Recubrimiento con desgaste</option>
+                                <option value="3">Para reencauchetado o cambio</option>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Estado de frenos</td>
+                            <td>
+                                <select name="estadoFrenos" id="estadoFrenos" required >
+                                <option value="0" disabled selected>Selecciona un estado</option>
+                                <option value="1">Optimo</option>
+                                <option value="2">Se requiere Ajuste</option>
+                            </td>
+                        </tr>
+
+                         <tr>
+                            <td>Funcionamiento Horometro</td>
+                            <td>
+                                <select name="funcionamientoHorometro" id="funcionamientoHorometro" required >
+                                <option value="0" disabled selected>Selecciona un estado</option>
+                                <option value="1">Operativo</option>
+                                <option value="2">Inoperativo</option>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Funcionamiento indicador de descarga</td>
+                            <td>
+                                <select name="funcionamientoIndicadorDescarga" id="funcionamientoIndicadorDescarga" required >
+                                <option value="0" disabled selected>Selecciona un estado</option>
+                                <option value="1">Operativo</option>
+                                <option value="2">Inoperativo</option>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Funcionamiento Bocina</td>
+                            <td>
+                                <select name="funcionamientoBocina" id="funcionamientoBocina" required >
+                                <option value="0" disabled selected>Selecciona un estado</option>
+                                <option value="1">Operativo</option>
+                                <option value="2">Inoperativo</option>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Funcionamiento Luces</td>
+                            <td>
+                                <select name="funcionamientoLuces" id="funcionamientoLuces" required >
+                                <option value="0" disabled selected>Selecciona un estado</option>
+                                <option value="1">Operativas</option>
+                                <option value="2">Inoperativas</option>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Funcionamiento Joystick</td>
+                            <td>
+                                <select name="funcionamientoJoystick" id="funcionamientoJoystick" required >
+                                <option value="0" disabled selected>Selecciona un estado</option>
+                                <option value="1">Operativo</option>
+                                <option value="2">Inoperativo</option>
+                            </td>
+                            <td><input type="text" name="observacionesJoystick" id="observacionesJoystick"></td>
+                        </tr>
+
+                         <tr>
+                            <td>Funcionamiento Hombre muerto</td>
+                            <td>
+                                <select name="funcionamientoHombreMuerto" id="funcionamientoHombreMuerto" required >
+                                <option value="0" disabled selected>Selecciona un estado</option>
+                                <option value="1">Operativo</option>
+                                <option value="2">Inoperativo</option>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Funcionamiento Paro de emergencia</td>
+                            <td>
+                                <select name="funcionamientoParoEmergencia" id="funcionamientoParoEmergencia" required >
+                                <option value="0" disabled selected>Selecciona un estado</option>
+                                <option value="1">Operativo</option>
+                                <option value="2">Inoperativo</option>
+                            </td>
+                        </tr>
+                </tbody>
+                
+            </table>
+
+            <table>
+                <caption>Insumos utilizados</caption>
+                <thead>
+                    <th>Nombre Insumo</th>
+                    <th>Cantidad</th>
+                    <th>Unidad de medida</th>
+                </thead>
+                <tbody id="tablaInsumosPreventivo">
+                    <tr>
+                        <td>
+                    <input type="button" id="agregarInsumo" value="AgregarInsumo" aria-label="Agregar insumo"></input>
+                        </td>
+                    </tr>
+                </tbody>
+            </table><!--Tabla para agregar insumos utilizados en el mantenimiento preventivo, con un boton para agregar mas filas-->
+
+        <label for="fotoRepuestosPreventivo">Foto de Repuestos instalados:</label>
+        <input type="file" id="fotoRepuestosPreventivo" name="fotoRepuestosPreventivo[]" accept="image/*" multiple aria-label="Subir fotos de los repuestos instalados en el mantenimiento preventivo">
+        <article id="contenedorFotosRepuestosPreventivos"></article>
+        </section><!--Fin seccion tipo servicio Preventivo-->
+
+        <section class="correctivo" id="correctivo" style="display: none;">
+            <h1>Servicio Correctivo</h1>
+        <label for="fotoRepuestosCorrectivo">Foto de Repuestos instalados:</label>
+        <input type="file" id="fotoRepuestosCorrectivo" name="fotoRepuestosCorrectivo[]" accept="image/*" multiple aria-label="Subir fotos de los repuestos instalados en el mantenimiento correctivo">
+        <article id="contenedorFotosRepuestosCorrectivo"></article>
+        </section><!--Fin seccion tipo servicio Correctivo-->
+
+        <section class="retiro" id="retiro" style="display: none;">
+           <table><!--Informacion Mastil-->
+                <caption>Informacion mastil</caption>
+                <thead>
+                    <th>Item a inspeccionar</th>
+                    <th>Estado (bueno/Regular/Malo)</th>
+                    <th>Observaciones</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mangueras posicionadas y en buen estado</td>
+                        <td>
+                             <select name="estadosManguerasRetiro" id="estadosManguerasRetiro" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesManguerasRetiro" id="observacionesManguerasRetiro"></td>
+                    </tr>
+                    <tr>
+                        <td>Cilindros funcionando correctamente</td>
+                        <td>
+                        <select name="estadosCilindrosRetiro" id="estadosCilindrosRetiro" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesCilindrosRetiro" id="observacionesCilindrosRetiro"></td>
+                    </tr>
+                    <tr>
+                        <td>Estado fisico del mastil</td>
+                        <td><select name="estadosEstadoMastilRetiro" id="estadosEstadoMastilRetiro" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select></td>
+                        <td><input type="text" name="observacionesEstadoMastilRetiro" id="observacionesEstadoMastilRetiro"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table><!--Informacion Chasis-->
+                <caption>Informacion Chasis</caption>
+                <thead>
+                    <th>Item a inspeccionar</th>
+                    <th>Estado (bueno/Regular/Malo)</th>
+                    <th>Observaciones</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Operacion parada de emergencia</td>
+                        <td>
+                            <select name="estadosParadaEmergenciaRetiro" id="estadosParadaEmergenciaRetiro" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesParadaEmergenciaRetiro" id="observacionesParadaEmergenciaRetiro"></td>
+                    </tr>
+                    <tr>
+                        <td>Operacion de pedales</td>
+                        <td>
+                        <select name="estadosPedalesRetiro" id="estadosPedalesRetiro" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesEstadoPedalesRetiro" id="observacionesEstadoPedalesRetiro"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table><!--Informacion General-->
+                <caption>Informacion General equipo</caption>
+                <thead>
+                    <th>Item a inspeccionar</th>
+                    <th>Estado (bueno/Regular/Malo)</th>
+                    <th>Observaciones</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pintura y estado general es adecuada</td>
+                        <td>
+                             <select name="estadosEstadoGeneralRetiro" id="estadosEstadoGeneralRetiro" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesEstadoGeneralRetiro" id="observacionesEstadoGeneralRetiro"></td>
+                    </tr>
+                    <tr>
+                            <td>Funcionamiento de luces y alarmas</td>
+                            <td><select name="estadosLucesAlarmasRetiro" id="estadosLucesAlarmasRetiro" required >
+                                <option value="0" disabled selected>Selecciona un estado</option>
+                                <option value="1">Bueno</option>
+                                <option value="2">Regular</option>
+                                <option value="3">Malo</option>
+                            </select></td>
+                            <td><input type="text" name="observacionesLucesAlarmasRetiro" id="observacionesLucesAlarmasRetiro"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Ejemplo para la foto de la batería -->
+        <label for="fotoMontacargaRetiro">Foto del Montacarga:</label>
+        <input type="file" id="fotoMontacargaRetiro" name="fotoMontacargaRetiro[]" accept="image/*" multiple aria-label="Subir fotos del montacarga en retiro" required>
+        <article id="contenedorFotosMontacargaRetiro"></article>
+
+            <table><!--Informacion cargador-->
+                <caption>Informacion del cargador </caption>
+                <thead>
+                    <th>Item a inspeccionar</th>
+                    <th>Estado (bueno/Regular/Malo)</th>
+                    <th>Observaciones</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>El sistema de carga de la bateria esta en optimas condiciones</td>
+                        <td>
+                             <select name="estadosSistemaCargaRetiro" id="estadosSistemaCargaRetiro" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesSistemaCargaRetiro" id="observacionesSistemaCargaRetiro"></td>
+                    </tr>
+                    <tr>
+                        <td>Estructura fisica del cargador</td>
+                        <td>
+                        <select name="estadosEstructuraCargadorRetiro" id="estadosEstructuraCargadorRetiro" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesEstructuraCargadorRetiro" id="observacionesEstructuraCargadorRetiro"></td>
+                    </tr>
+                    <tr>
+                        <td>Entrega de equipo con clavija de seguridad</td>
+                        <td><select name="estadosEntregaClavijaRetiro" id="estadosEntregaClavijaRetiro" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Si</option>
+                            <option value="2">No</option>
+                        </select></td>
+                        <td><input type="text" name="observacionesEntregaClavijaRetiro" id="observacionesEntregaClavijaRetiro"></td>
+                    </tr>
+                </tbody>
+            </table>
+        <label for="fotoCargadorRetiro">Foto del Cargador:</label>
+        <input type="file" id="fotoCargadorRetiro" name="fotoCargadorRetiro[]" accept="image/*" multiple aria-label="Subir fotos del cargador en retiro" required >
+        <article id="contenedorFotosCargadorRetiro"></article>
+
+        <table><!--Informacion bateria-->
+                <caption>Informacion de la bateria </caption>
+                <thead>
+                    <th>Item a inspeccionar</th>
+                    <th>Estado (bueno/Regular/Malo)</th>
+                    <th>Observaciones</th>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>Nivel de electrolito adecuado</td>
+                        <td>
+                        <select name="estadoElectrolitoRetiro" id="estadoElectrolitoRetiro" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="observacionesElectrolitoRetiro" id="observacionesElectrolitoRetiro"></td>
+                    </tr>
+                    <tr>
+                        <td>Apariencia general de la bateria</td>
+                        <td><select name="estadosAparienciaBateriaRetiro" id="estadosAparienciaBateriaRetiro" required >
+                            <option value="0" disabled selected>Selecciona un estado</option>
+                            <option value="1">Bueno</option>
+                            <option value="2">Regular</option>
+                            <option value="3">Malo</option>
+                        </select></td>
+                        <td><input type="text" name="observacionesAparienciaBateriaRetiro" id="observacionesAparienciaBateriaRetiro"></td>
+                    </tr>
+                </tbody>
+        </table>
+        <label for="fotoBateriaRetiro">Foto de la Bateria:</label>
+        <input type="file" id="fotoBateriaRetiro" name="fotoBateriaRetiro[]" accept="image/*" multiple aria-label="Subir fotos de la bateria en retiro" required>
+        <article id="contenedorFotosBateriaRetiro"></article>
+
+        </section><!--Fin seccion tipo servicio Retiro de equipo-->
+
+        <section class="Diagnostico" id="diagnostico" style ="display: none;">
+            <h1> Servicio Diagnostico</h1>
+
+            <label for="fuenteEnergia">¿Cual es la fuente de energia del equipo:</label>
+            <select name="fuenteEnergia" id="fuenteEnergia" required >
+                <option value="0" disabled selected>Selecciona una fuente</option>
+                <option value="1">Eléctrica</option>
+                <option value="2">Combustión</option>
+            </select><br>
+
+            <div id="PreguntasCombustion"  style="display: none;">
+                <h2>Creacion Montacarga Combustion</h2>
+                <fieldset>
+                    <legend>Datos generales del equipo</legend>
+                    <label for="TipoDeCombustible">¿Que combustible utiliza?:</label>
+                    <select name="tipoDeCombustible" id="tipoDeCombustible" required >
+                    <option value="0" disabled selected>Selecciona un tipo</option>
+                    <option value="1">Gasolina</option>
+                    <option value="2">Diesel</option>
+                    <option value="3">Gas</option>
+                    <option value="4">Dual</option>
+                    </select><br>
+                </fieldset>
+
+                
+               <div id="CombustionGasolina" style ="display: none;">
+                <fieldset>
+                    <legend>Datos del sistema de gasolina</legend>
+                    <label for="ReferenciaCarburador">Referencia del carburador:</label>
+                    <input type="text" name="ReferenciaCarburador" id="ReferenciaCarburador"><br>
+                </fieldset>
+               </div> 
+
+               <div id="CombustionDiesel" style ="display: none;">
+                <fieldset>
+                    <legend>Datos del sistema de diesel</legend>
+                    <label for="RefeFiltroCombustibleDiesel">Referencia filtro de combustible: </label>
+                    <input type="text" name="RefeFiltroCombustibleDiesel" id="RefeFiltroCombustibleDiesel" disabled> <br>
+                </fieldset>
+               </div> 
+
+
+               <div id="CombustionGas" style ="display: none;">
+                <fieldset>
+                    <legend>Datos del sistema de gas</legend>
+                    <label for="MarcaVaporizador">Marca del vaporizador:</label>
+                    <input type="text" name="MarcaVaporizador" id="MarcaVaporizador"><br>
+                    <label for="ReferenciaVaporizador">Referencia del vaporizador:</label>
+                    <input type="text" name="ReferenciaVaporizador" id="ReferenciaVaporizador"><br>
+                </fieldset>
+               </div> 
+
+               
+               <div id="CombustionDual" style ="display: none;">
+                <fieldset>
+                    <legend>Datos del sistema dual</legend>
+                    <label for="MarcaVaporizadorDual">Marca del vaporizador:</label>
+                    <input type="text" name="MarcaVaporizadorDual" id="MarcaVaporizadorDual"><br>
+                    <label for="ReferenciaVaporizadorDual">Referencia del vaporizador:</label>
+                    <input type="text" name="ReferenciaVaporizadorDual" id="ReferenciaVaporizadorDual"><br>
+                    <label for="ReferenciaCarburadorDual">Referencia del carburador:</label>
+                    <input type="text" name="ReferenciaCarburadorDual" id="ReferenciaCarburadorDual"><br>
+                </fieldset>
+               </div> 
+
+                <fieldset>
+                <legend>Datos y medidas chasis</legend>
+                <label for="AlturaMastilH1Combustion">Altura mastil replegado:</label>
+                <input type="number" name="AlturaMastilH1Combustion" id="AlturaMastilH1Combustion"> cm<br>
+                <label for="AlturaMastilH3Combustion">Altura mastil extendido:</label>
+                <input type="number" name="AlturaMastilH3Combustion" id="AlturaMastilH3Combustion"> cm<br>
+                <label for="CapacidadDeCargaCombustion">Capacidad de carga:</label>
+                <input type="number" name="CapacidadDeCargaCombustion" id="CapacidadDeCargaCombustion"> kg<br>
+                <label for="fotoMontacargaCombustion">Foto del Montacarga:</label>
+                <input type="file" id="fotoMontacargaCombustionDiagnostico" name="fotoMontacarga[]" accept="image/*" multiple aria-label="Subir fotos del montacarga">
+                <article id="contenedorFotosMontacargaCombustionDiagnostico"></article>
+                </fieldset>
+
+                <fieldset>
+                <legend>Referencia filtros</legend>
+                <label for="RefeFiltroAire">Referencia filtro de aire: </label>
+                <input type="text" name="RefeFiltroAire" id="RefeFiltroAire"> <br>
+                <label for="RefeFiltroMotor">Referencia filtro de motor: </label>
+                <input type="text" name="RefeFiltroMotor" id="RefeFiltroMotor"> <br>
+                <label for="RefeFiltroTransmisión">Referencia filtro de transmisión: </label>
+                <input type="text" name="RefeFiltroTransmisión" id="RefeFiltroTransmisión"> <br>
+                <label for="RefeFiltroCombustible">Referencia filtro de combustible: </label>
+                <input type="text" name="RefeFiltroCombustible" id="RefeFiltroCombustible"> <br>
+        
+                </fieldset>
+
+                <fieldset>
+                    <legend>Datos de las ruedas </legend>
+                </fieldset>
+
+            </div>
+
+            <div id="preguntasElectricas" style="display: none;">
+                <h2>Creacion Montacarga Eléctrica</h2>
+                <fieldset>
+                    <legend>Datos generales del equipo</legend>
+                <label for="TipoDeMontacarga">Tipo de montacarga:</label>
+                <select name="tipoDeMontacarga" id="tipoDeMontacarga" required >
+                <option value="0" disabled selected>Selecciona un tipo</option>
+                <option value="1">Doble profundidad</option>
+                <option value="2">Profundidad Sencilla</option>
+                <option value="3">Contrabalanceada 4 ruedas</option>
+                <option value="4">Contrabalanceada 3 ruedas</option>
+                <option value="5">Order picker</option>
+                <option value="6">Transportador horizontal </option>
+                <option value="7">Trilateral </option>
+                <option value="8"> Articulado bidireccional</option>
+                </select><br>
+                </fieldset>
+                
+                <fieldset>
+
+                    <legend>Datos y medidas de la bateria</legend>
+                <label for="tipoBateria">¿Qué tipo de bateria es:</label>
+                <select name="tipoBateria" id="tipoBateria" required >
+                <option value="0" disabled selected>Selecciona un tipo</option>
+                <option value="1">Litio</option>
+                <option value="2">Plomo Acido</option>
+                </select><br>
+                <label for="voltajeBateria">Voltaje de la bateria:</label>
+                <input type="number" name="voltajeBateria" id="voltajeBateria"> V<br>
+                <label for="amperajeBateria">Amperaje de la bateria:</label>
+                <input type="number" name="amperajeBateria" id="amperajeBateria"> A<br>
+                <label for="largoCofre ">Largo del cofre:</label>
+                <input type="number" name="largoCofre" id="largoCofre"> cm<br>
+                <label for="anchoCofre">Ancho del cofre:</label>
+                <input type="number" name="anchoCofre" id="anchoCofre"> cm<br>
+                <label for="altoCofre">Alto del cofre:</label>
+                <input type="number" name="altoCofre" id="altoCofre"> cm<br>
+                <label for="tipoConectorBateria">Conector de la bateria:</label>
+                <select name="tipoConectorBateria" id="tipoConectorBateria"  required >
+                <option value="0" disabled selected>Selecciona un tipo</option>
+                <option value="1">Anderson</option>
+                <option value="2">Rema</option>
+                </select><br>
+                <label for="tipoConectorIntercelda">Tipo de conector intercelda:</label>
+                <select name="tipoConectorIntercelda" id="tipoConectorIntercelda" required >
+                <option value="0" disabled selected>Selecciona un tipo</option>
+                <option value="1">Tornillo</option>
+                <option value="2">Soldado</option>
+                <option value="3">Sellado</option>
+                </select><br>
+                </fieldset>
+
+                <fieldset>
+                <legend>Datos y medidas chasis</legend>
+                <label for="AlturaMastilH1">Altura mastil replegado:</label>
+                <input type="number" name="AlturaMastilH1" id="AlturaMastilH1"> cm<br>
+                <label for="AlturaMastilH3">Altura mastil extendido:</label>
+                <input type="number" name="AlturaMastilH3" id="AlturaMastilH3"> cm<br>
+                <label for="CapacidadDeCarga">Capacidad de carga:</label>
+                <input type="number" name="CapacidadDeCarga" id="CapacidadDeCarga"> kg<br>
+                <label for="largoHorquillas">Largo de las horquillas:</label>
+                <input type="number" name="largoHorquillas" id="largoHorquillas"> cm<br>
+                <label for="fotoMontacargaDiagnostico">Foto del Montacarga:</label>
+                <input type="file" id="fotoMontacargaDiagnostico" name="fotoMontacargaDiagnostico[]" accept="image/*" multiple aria-label="Subir fotos del montacarga">
+                <article id="contenedorFotosMontacargaDiagnostico"></article>
+                </fieldset>
+
+                <fieldset>
+                <legend>Datos y medidas ruedas</legend>
+                <label for="TipoDeRueda">¿Qué tipo de rueda es:</label>
+                <select name="tipoRueda" id="tipoRueda" required >
+                <option value="0" disabled selected>Selecciona un tipo</option>
+                <option value="1">Neumática</option>
+                <option value="2">Maciza</option>
+                </select><br>
+                
+                <div id="preguntasRuedasMacizas" style="display: none;">
+                    <fieldset>
+                        <legend>Rueda Motriz</legend>
+                        <label for="AltoRuedaMotriz">Alto de rueda Motriz:</label>
+                        <input type="number" name="AltoRuedaMotriz" id="AltoRuedaMotriz"> cm<br>
+                        <label for="AnchoRuedaMotriz">Ancho rueda Motriz:</label>
+                        <input type="number" name="AnchoRuedaMotriz" id="AnchoRuedaMotriz"> cm<br>
+                        <label for="HuecosRuedaMotriz">Numero de huecos:</label>
+                        <input type="number" name="HuecosRuedaMotriz" id="HuecosRuedaMotriz"> <br>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Ruedas de carga</legend>
+                        <label for="AltoRuedaCarga">Alto de rueda de carga:</label>
+                        <input type="number" name="AltoRuedaCarga" id="AltoRuedaCarga"> cm<br>
+                        <label for="AnchoRuedaCarga">Ancho rueda de carga:</label>
+                        <input type="number" name="AnchoRuedaCarga" id="AnchoRuedaCarga"> cm<br>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Ruedas caster</legend>
+                        <label for="AltoRuedaCaster">Alto de rueda caster:</label>
+                        <input type="number" name="AltoRuedaCaster" id="AltoRuedaCaster"> cm<br>
+                        <label for="AnchoRuedaCaster">Ancho rueda caster:</label>
+                        <input type="number" name="AnchoRuedaCaster" id="AnchoRuedaCaster"> cm<br>
+                    </fieldset>
+                </div>
+                <div id="preguntasRuedasNeumaticas" style="display: none;">
+                    <h2>Preguntas para ruedas neumáticas</h2>
+                </div>
+                
+
+                </fieldset>
+            </div>
+        </section>
+
+        <section class="DatosGeneralesContenedor">
+            <fieldset>
+                <legend>Datos Generales</legend>
+                <label for="Observaciones">Observaciones:</label><br>
+            <textarea name="Observaciones" id="Observaciones" cols="30" rows="10" required ></textarea><br>
+            <label for="Pendientes">Pendientes:</label><br>
+            <textarea name="Pendientes" id="Pendientes" cols="30" rows="10" required></textarea><br>
+
+            <label for="nombreTecnico">Nombre del tecnico:</label><br>
+            <input type="text" name="nombreTecnico" id="nombreTecnico" required><br>
+            <label for="firmaTecnico">Firma del tecnico:</label><br>
+            <canvas  name="firmaTecnico" id="firmaTecnico" width="300" height="100" required></canvas><br>
+            <button type="button" id="eliminarFirmaTecnico" aria-label="Eliminar firma Tecnico">Eliminar Firma</button>
+            
+
+            <label for="nombreRecibe">Nombre del quien recibe:</label><br>
+            <input type="text" name="nombreRecibe" id="nombreRecibe" required><br>
+            <label for="firmaRecibe">Firma del quien recibe:</label><br>
+            <canvas name="firmaRecibe" id="firmaRecibe" width="300" height="100" required></canvas><br>
+            <button type="button" id="eliminarFirmaCliente" aria-label="Eliminar firma cliente">Eliminar Firma</button>
+             <button type="submit" id="btnEnviar" aria-label="Enviar formulario">Enviar Formulario ✉️</button>
+        </fieldset>
+        </section><!--Fin seccion datos generales (Observaciones,pendientes,nombre tecnico y persona recibe y firma)-->
+    
+    </form>
+</main>
+<footer></footer>
+
+<script src="./script.js" type="module"></script>
+
+</body>
+</html>
