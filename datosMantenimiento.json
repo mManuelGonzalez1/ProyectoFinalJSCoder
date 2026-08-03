@@ -1,0 +1,21 @@
+{
+    "clientes":[
+        {"id":1,"nombre":"Solistica","direccion":"direccionPrincipal","numeroTelefonico":"3163538460"},
+        {"id":2,"nombre":"DHL","direccion":"direccionPrincipal","numeroTelefonico":"3163536460"},
+        {"id":3,"nombre":"Canpack","direccion":"direccionPrincipal","numeroTelefonico":"3163238460"},
+        {"id":4,"nombre":"Vigia Plus","direccion":"direccionPrincipal","numeroTelefonico":"3165538460"},
+        {"id":5,"nombre":"Envia","direccion":"direccionPrincipal","numeroTelefonico":"3163538260"}   
+    ],
+    "insumos":[
+        {"id":1,"nombre":"Desengrasante"},
+        {"id":2,"nombre":"Silicona"},
+        {"id":3,"nombre":"Limpiador"},
+        {"id":4,"nombre":"Bolsa de trapos"} 
+    ],
+    "tecnicos":[
+        {"nombre":"Javier Balaguera","edad":65,"cedula":"678909876","vehiculo":"Moto","placa":"HOY 890"},
+        {"nombre":"William Ramirez","edad":45,"cedula":"678907876","vehiculo":"Moto","placa":"LNT 025"},
+        {"nombre":"Jhon Obando","edad":40,"cedula":"678909876","vehiculo":"Bicicleta","placa":"0000"},
+        {"nombre":"Sebastian Velasquez","edad":35,"cedula":"678909876","vehiculo":"N/a","placa":"0000"}
+    ]
+}
