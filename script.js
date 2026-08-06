@@ -14,6 +14,17 @@ const paresFotos = [
     ["fotoRepuestosPreventivo", "contenedorFotosRepuestosPreventivos"],
     ["fotoRepuestosCorrectivo", "contenedorFotosRepuestosCorrectivo"]
 ];
+const selectTipoServicio= document.getElementById("tipoServicio");
+
+// Secciones principales
+ const secciones=[
+    {value:1,seccion:document.getElementById("correctivo")},
+    {value:2,seccion:document.getElementById("preventivo")},
+    {value:3,seccion:document.getElementById("diagnostico")},
+    {value:4,seccion:document.getElementById("entrega")},
+    {value:5,seccion:document.getElementById("retiro")}
+];
+
 //Map para no escribir 16 lineas de codigo
 const configuracionFotos = paresFotos.map(([inputId, contenedorId]) => ({
     input: document.getElementById(inputId),
@@ -87,7 +98,7 @@ function procesarFotos(ContenedorFotos, InputFoto) {
         ContenedorFotos.appendChild(nuevaFoto);
     }
 }
-
+//Funcion para crear imagenes en base 64 
 function convertirBase64(archivo){
     return new Promise((resolve, reject) => {
         const lector= new FileReader();
@@ -145,12 +156,22 @@ botonAgregarInsumos.addEventListener("click",(event)=>{
     `);
 });
 
-
+//evento para activar las secciones
+selectTipoServicio.addEventListener("change",(event)=>{
+    const valor= parseInt(event.target.value)
+    secciones.forEach(i=>{
+        i.seccion.style.display="none";
+        if(valor === i.value){
+            i.seccion.style.display="block";
+        }
+        })
+})
 // Evento para mostrar la foto subida por el tecnico dependiendo del modelo seleccionado
 for (let par of configuracionFotos) {
     if(par.input && par.contenedor){
     par.input.addEventListener("change", function() {
         procesarFotos(par.contenedor, par.input);
+// for para que la promesa ejecute cada imagen subida al los inputs 
         for (let foto of par.input.files){
             convertirBase64(foto)
             .then((base)=>{
