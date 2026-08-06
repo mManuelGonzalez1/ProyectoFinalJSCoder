@@ -15,7 +15,6 @@ const paresFotos = [
     ["fotoRepuestosCorrectivo", "contenedorFotosRepuestosCorrectivo"]
 ];
 const selectTipoServicio= document.getElementById("tipoServicio");
-
 // Secciones principales
  const secciones=[
     {value:1,seccion:document.getElementById("correctivo")},
@@ -24,7 +23,15 @@ const selectTipoServicio= document.getElementById("tipoServicio");
     {value:4,seccion:document.getElementById("entrega")},
     {value:5,seccion:document.getElementById("retiro")}
 ];
+const firmaTecnico = document.getElementById("firmaTecnico");
+const firmaCliente= document.getElementById("firmaRecibe");
+//Crear contexto de dibujo 
+const ctxTecnico = firmaTecnico.getContext("2d");
+const ctxCliente= firmaCliente.getContext("2d");
 
+// boton borrar firma 
+const borrarFirmaTecnico= document.getElementById("eliminarFirmaTecnico");
+const borrarFirmaCliente= document.getElementById("eliminarFirmaCliente");
 //Map para no escribir 16 lineas de codigo
 const configuracionFotos = paresFotos.map(([inputId, contenedorId]) => ({
     input: document.getElementById(inputId),
@@ -113,8 +120,56 @@ function convertirBase64(archivo){
         lector.readAsDataURL(archivo);
     })
 }
+// Función para empezar el trazo
+ function EmpezarTrazo(valor, evento) {
+    valor.beginPath();
+    valor.moveTo(evento.offsetX, evento.offsetY);
+}
+
+// Función para mover el trazo
+ function MoverTrazo(valor, evento, color) {
+    valor.lineTo(evento.offsetX, evento.offsetY);
+    valor.strokeStyle = `${color}`;
+    valor.lineWidth = 3;
+    valor.lineCap = "round"; // Hace que las puntas de las líneas sean redondas
+    valor.lineJoin = "round"; // Hace que las esquinas donde se unen las líneas sean curvas
+    valor.stroke();
+}
+
+// Función para eliminar trazo
+ function eliminarTrazo(contexto, valor) {
+    contexto.clearRect(0, 0, valor.width, valor.height);
+}
 
 
+// ========================================
+//FUNCION - FIRMA TÉCNICO
+// ========================================
+function activarCanvas(canvas,ctx,botonBorrar,color="black"){
+    let estaDibujando= false;
+    canvas.addEventListener("mousedown", function(e) {
+    estaDibujando = true;
+    EmpezarTrazo(ctx, e);
+    });
+    canvas.addEventListener("mousemove", function(e) {
+    if (estaDibujando === true) {
+        MoverTrazo(ctx, e, color);
+    }
+    });
+    canvas.addEventListener("mouseup", function(e) {
+    estaDibujando = false;
+    });
+    canvas.addEventListener("mouseleave", function(e) {
+    estaDibujando = false;
+    });
+    botonBorrar.addEventListener("click", e=>{
+    eliminarTrazo(ctx,canvas);
+    })
+    
+}
+
+activarCanvas(firmaTecnico,ctxTecnico,borrarFirmaTecnico,"red");
+activarCanvas(firmaCliente, ctxCliente, borrarFirmaCliente,"blue");
 
 
 //Escuchhador para autollenado de campos
@@ -185,3 +240,5 @@ for (let par of configuracionFotos) {
     });
     }
 }
+
+
