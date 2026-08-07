@@ -41,7 +41,7 @@ const configuracionFotos = paresFotos.map(([inputId, contenedorId]) => ({
 ];
 
 // Arrays para almacenar fotos en base64
-let fotosMontacargaBase64 = []; // Array para guardar las fotos del montacarga en base 64
+let reportesFotograficos64 = {}; // Array para guardar las fotos del montacarga en base 64
 let fotosBateriaBase64 = []; // Array para guardar las fotos de bateria en base 64
 let fotosCargadorBase64 = []; // Array para guardar las fotos del cargador en base 64
 
@@ -221,19 +221,23 @@ selectTipoServicio.addEventListener("change",(event)=>{
 // Evento para mostrar la foto subida por el tecnico dependiendo del modelo seleccionado
 for (let par of configuracionFotos) {
     if(par.input && par.contenedor){
-    par.input.addEventListener("change", function() {
+    par.input.addEventListener("change", function(e) {
+        let idEvento=e.target.id
         procesarFotos(par.contenedor, par.input);
 // for para que la promesa ejecute cada imagen subida al los inputs 
         for (let foto of par.input.files){
             convertirBase64(foto)
             .then((base)=>{
-                console.log("Exito", base)
+                if(!reportesFotograficos64[idEvento]){
+                    reportesFotograficos64[idEvento] = [];
+                }
+                reportesFotograficos64[idEvento].push(base);
             })
             .catch((error)=>{
                 console.error("error", error)
             });
         }
-            
+       console.log(reportesFotograficos64)     
     });
     }
 }
