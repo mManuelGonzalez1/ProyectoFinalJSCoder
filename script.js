@@ -1,9 +1,20 @@
 //Variables
+const formularioServicio= document.getElementById("formularioDeServicio")
 const selectNombreCliente= document.getElementById("NombreCliente");
 const direccionCliente= document.getElementById("DireccionCliente");
 const numeroTelefono= document.getElementById("NumeroTelefono");
 const botonAgregarInsumos= document.getElementById("agregarInsumo");
 const cuerpoTablaInsumos=document.getElementById("tablaInsumosPreventivo");
+const selectTipoServicio= document.getElementById("tipoServicio");
+const firmaTecnico = document.getElementById("firmaTecnico");
+const firmaCliente= document.getElementById("firmaRecibe");
+//Crear contexto de dibujo 
+const ctxTecnico = firmaTecnico.getContext("2d");
+const ctxCliente= firmaCliente.getContext("2d");
+
+// boton borrar firma 
+const borrarFirmaTecnico= document.getElementById("eliminarFirmaTecnico");
+const borrarFirmaCliente= document.getElementById("eliminarFirmaCliente");
 const paresFotos = [
     ["fotoMontacarga", "contenedorFotosMontacarga"],
     ["fotoCargador", "contenedorFotosCargador"],
@@ -14,7 +25,12 @@ const paresFotos = [
     ["fotoRepuestosPreventivo", "contenedorFotosRepuestosPreventivos"],
     ["fotoRepuestosCorrectivo", "contenedorFotosRepuestosCorrectivo"]
 ];
-const selectTipoServicio= document.getElementById("tipoServicio");
+//Map para no escribir 16 lineas de codigo
+const configuracionFotos = paresFotos.map(([inputId, contenedorId]) => ({
+    input: document.getElementById(inputId),
+    contenedor: document.getElementById(contenedorId)
+}));
+
 // Secciones principales
  const secciones=[
     {value:1,seccion:document.getElementById("correctivo")},
@@ -23,23 +39,6 @@ const selectTipoServicio= document.getElementById("tipoServicio");
     {value:4,seccion:document.getElementById("entrega")},
     {value:5,seccion:document.getElementById("retiro")}
 ];
-const firmaTecnico = document.getElementById("firmaTecnico");
-const firmaCliente= document.getElementById("firmaRecibe");
-//Crear contexto de dibujo 
-const ctxTecnico = firmaTecnico.getContext("2d");
-const ctxCliente= firmaCliente.getContext("2d");
-
-// boton borrar firma 
-const borrarFirmaTecnico= document.getElementById("eliminarFirmaTecnico");
-const borrarFirmaCliente= document.getElementById("eliminarFirmaCliente");
-//Map para no escribir 16 lineas de codigo
-const configuracionFotos = paresFotos.map(([inputId, contenedorId]) => ({
-    input: document.getElementById(inputId),
-    contenedor: document.getElementById(contenedorId)
-}));
-
-
-
 
 // Arrays para almacenar fotos en base64
 let fotosMontacargaBase64 = []; // Array para guardar las fotos del montacarga en base 64
@@ -182,8 +181,6 @@ selectNombreCliente.addEventListener("change",(event)=>{
         direccionCliente.value=clienteSeleccionado.direccion;
         numeroTelefono.value=clienteSeleccionado.numeroTelefonico;
     })
-
-
 //Escuchador para leida de fectch y llenado de select insumos 
 botonAgregarInsumos.addEventListener("click",(event)=>{
     let opcionesHTML='<option value="0" disabled selected>Selecciona un insumo</option>';
@@ -241,4 +238,30 @@ for (let par of configuracionFotos) {
     }
 }
 
-
+//Escuchador para el envio del formulario
+formularioServicio.addEventListener("submit",(e)=>{
+    e.preventDefault();
+    console.log(selectTipoServicio.value);
+    let arrayFieldset =[...formularioServicio.getElementsByClassName("contenedor-global")]
+    console.log(arrayFieldset);
+    let valorElegido = parseInt(selectTipoServicio.value);
+    let objetoEncontrado= secciones.find(v=> v.value === valorElegido);
+    objetoEncontrado ? arrayFieldset.push(objetoEncontrado.seccion):console.error("error");
+    let formularioValido=true;
+    arrayFieldset.forEach(campos=>{
+        let arrayFieldsetInterno=[...campos.querySelectorAll("input, select, textarea")];
+        arrayFieldsetInterno.forEach(elementos=>{
+            if(elementos.value.trim() ===""||elementos.value=== "0"){
+                formularioValido=false;
+                elementos.style.border="1px solid red";
+            }
+        })
+    })
+    if(formularioValido){
+        console.log("¡Formulario 100% validado y listo para empaquetar!")
+    }else{ 
+        alert("Por favor llena todos los campos")
+            
+    }
+   
+})

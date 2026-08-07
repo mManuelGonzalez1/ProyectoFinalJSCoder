@@ -8,9 +8,9 @@
 <body>
 <header></header>
 <main>
-    <form action="">
+    <form action="" id="formularioDeServicio" novalidate>
 
-        <fieldset><!--Informaccion del cliente-->
+        <fieldset class="contenedor-global"><!--Informaccion del cliente-->
             <legend>Informacion del cliente</legend>
             <label for="NombreCliente">Nombre del cliente:</label>
             <select name="NombreCliente" id="NombreCliente" required >
@@ -28,7 +28,7 @@
             <input type="number" name="NumeroBodega" id="NumeroBodega" required><br>
         </fieldset>
 
-        <fieldset><!--Datos del montacarga-->
+        <fieldset class="contenedor-global"><!--Datos del montacarga-->
             <legend>Datos de Montacarga</legend>
             <label for="Marca">Marca:</label>
             <select name="Marca" id="Marca" required >
@@ -52,7 +52,7 @@
             <input type="number" name="año" id="año" required><br>
         </fieldset>
 
-        <fieldset><!--Datos de servicio-->
+        <fieldset class="contenedor-global"><!--Datos de servicio-->
             <legend>Datos de servicio</legend>
             <label for="fecha">Fecha:</label>
             <input type="date" name="fecha" id="fecha" required><br>
@@ -964,8 +964,7 @@
             </div>
         </section>
 
-        <section class="DatosGeneralesContenedor">
-            <fieldset>
+        <fieldset class="contenedor-global">
                 <legend>Datos Generales</legend>
                 <label for="Observaciones">Observaciones:</label><br>
             <textarea name="Observaciones" id="Observaciones" cols="30" rows="10" required ></textarea><br>
@@ -985,8 +984,7 @@
             <canvas name="firmaRecibe" id="firmaRecibe" width="300" height="100" required></canvas><br>
             <button type="button" id="eliminarFirmaCliente" aria-label="Eliminar firma cliente">Eliminar Firma</button>
              <button type="submit" id="btnEnviar" aria-label="Enviar formulario">Enviar Formulario ✉️</button>
-        </fieldset>
-        </section><!--Fin seccion datos generales (Observaciones,pendientes,nombre tecnico y persona recibe y firma)-->
+        </fieldset><!--Fin seccion datos generales (Observaciones,pendientes,nombre tecnico y persona recibe y firma)-->
     
     </form>
 </main>
