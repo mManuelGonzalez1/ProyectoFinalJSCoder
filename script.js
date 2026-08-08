@@ -42,9 +42,6 @@ const configuracionFotos = paresFotos.map(([inputId, contenedorId]) => ({
 
 // Arrays para almacenar fotos en base64
 let reportesFotograficos64 = {}; // Array para guardar las fotos del montacarga en base 64
-let fotosBateriaBase64 = []; // Array para guardar las fotos de bateria en base 64
-let fotosCargadorBase64 = []; // Array para guardar las fotos del cargador en base 64
-
 //variables para mostrar json 
 let listaClientes=[];
 let listaInsumos=[];
@@ -170,6 +167,14 @@ function activarCanvas(canvas,ctx,botonBorrar,color="black"){
 activarCanvas(firmaTecnico,ctxTecnico,borrarFirmaTecnico,"red");
 activarCanvas(firmaCliente, ctxCliente, borrarFirmaCliente,"blue");
 
+function obtenerFirmas64(firmaTec,firmaClie,objeto){
+    
+    let base64FirmaTecnico=firmaTec.toDataURL("image/png");
+    let base64FirmaCliente=firmaClie.toDataURL("image/png");
+    objeto["FirmaCliente"]=base64FirmaCliente;
+    objeto["FirmaTecnico"]=base64FirmaTecnico;
+    
+}
 
 //Escuchhador para autollenado de campos
 selectNombreCliente.addEventListener("change",(event)=>{
@@ -237,7 +242,7 @@ for (let par of configuracionFotos) {
                 console.error("error", error)
             });
         }
-       console.log(reportesFotograficos64)     
+            
     });
     }
 }
@@ -245,6 +250,9 @@ for (let par of configuracionFotos) {
 //Escuchador para el envio del formulario
 formularioServicio.addEventListener("submit",(e)=>{
     e.preventDefault();
+    //Funcion para obtener firmas en imagen
+    obtenerFirmas64(firmaTecnico,firmaCliente,reportesFotograficos64)
+
     console.log(selectTipoServicio.value);
     let arrayFieldset =[...formularioServicio.getElementsByClassName("contenedor-global")]
     console.log(arrayFieldset);
@@ -267,5 +275,6 @@ formularioServicio.addEventListener("submit",(e)=>{
         alert("Por favor llena todos los campos")
             
     }
+    console.log(reportesFotograficos64)
    
 })
