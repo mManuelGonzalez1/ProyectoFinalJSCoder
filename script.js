@@ -1,13 +1,30 @@
 //Variables
 const formularioServicio= document.getElementById("formularioDeServicio")
 const selectNombreCliente= document.getElementById("NombreCliente");
+const nombrePersonalCliente= document.getElementById("NombrePersona");
 const direccionCliente= document.getElementById("DireccionCliente");
 const numeroTelefono= document.getElementById("NumeroTelefono");
+const ciudadAtendida= document.getElementById("Ciudad");
+const numeroBodega= document.getElementById("NumeroBodega");
 const botonAgregarInsumos= document.getElementById("agregarInsumo");
 const cuerpoTablaInsumos=document.getElementById("tablaInsumosPreventivo");
 const selectTipoServicio= document.getElementById("tipoServicio");
+const observaciones= document.getElementById("Observaciones");
+const pendientes= document.getElementById("Pendientes");
+const nombreTecnico= document.getElementById("nombreTecnico");
+const nombreRecibe= document.getElementById("nombreRecibe");
 const firmaTecnico = document.getElementById("firmaTecnico");
 const firmaCliente= document.getElementById("firmaRecibe");
+// Datos del equipo y tiempos (seleccionados por Id)
+const marca = document.getElementById("Marca");
+const modelo = document.getElementById("Modelo");
+const serie = document.getElementById("serie");
+const horometro = document.getElementById("Horometro");
+const anioFabricacion = document.getElementById("año");
+const fecha = document.getElementById("fecha");
+const horaInicio = document.getElementById("time-inicial");
+const horaFinalizacion = document.getElementById("time-final");
+const consecutivo = document.getElementById("numeroConsecutivo");
 //Crear contexto de dibujo 
 const ctxTecnico = firmaTecnico.getContext("2d");
 const ctxCliente= firmaCliente.getContext("2d");
@@ -52,7 +69,6 @@ fetch("./datosMantenimiento.json")
   listaClientes=datos.clientes
   listaInsumos=datos.insumos;
   crearElementos(listaClientes); 
-  console.log(listaInsumos); 
 })
 .catch((error)=>{
     console.error("Error cargando los datos:", error)  
@@ -68,7 +84,6 @@ const optionDefault= document.createElement("option");
     optionDefault.textContent="Selecciona una cliente";
     selectNombreCliente.appendChild(optionDefault);
     data.forEach(element => {
-        console.log(element.id);
         const option= document.createElement("option");
         option.value=element.id;
         option.textContent=element.nombre;
@@ -175,14 +190,56 @@ function obtenerFirmas64(firmaTec,firmaClie,objeto){
     objeto["FirmaTecnico"]=base64FirmaTecnico;
     
 }
+function extraerTextoSelect(elementoSelect) {
+    return elementoSelect.options[elementoSelect.selectedIndex].textContent;
+}
 
-//Escuchhador para autollenado de campos
+function empaquetarDatos(){
+let arrayEmpaquetadoFieldsetInterno=[]
+let reporteFinal={}
+    for(let seccion of secciones){
+        if(seccion.seccion.style.display === "block"){
+              arrayEmpaquetadoFieldsetInterno=[...seccion.seccion.querySelectorAll("input, select, textarea")];
+             break;
+        }
+    }
+    arrayEmpaquetadoFieldsetInterno.forEach((elemento)=>{
+        if(elemento.tagName==="SELECT"){
+            reporteFinal[elemento.id]=extraerTextoSelect(elemento)
+        }else{
+            reporteFinal[elemento.id]=elemento.value;
+        }
+    })
+    reporteFinal.nombreCliente=extraerTextoSelect(selectNombreCliente);
+    reporteFinal.direccionCliente=direccionCliente.value;
+    reporteFinal.numeroTelefonoCliente=numeroTelefono.value;
+    reporteFinal.ciudad=ciudadAtendida.value;
+    reporteFinal.numeroBodega=numeroBodega.value;
+    reporteFinal.tipoServicio=extraerTextoSelect(selectTipoServicio)
+    reporteFinal.evidenciaGrafica=reportesFotograficos64;
+    reporteFinal.observaciones=observaciones.value;
+    reporteFinal.pendientes=pendientes.value;
+    reporteFinal.nombreTecnico=nombreTecnico.value;
+    reporteFinal.nombreRecibe=nombreRecibe.value;
+    reporteFinal.marca=extraerTextoSelect(marca);
+    reporteFinal.modelo=modelo.value;
+    reporteFinal.serie=serie.value;
+    reporteFinal.horometro=horometro.value;
+    reporteFinal.añoFabricacion=anioFabricacion.value;
+    reporteFinal.fecha=fecha.value;
+    reporteFinal.horaInicio=horaInicio.value;
+    reporteFinal.horaFinalizacion=horaFinalizacion.value;
+    reporteFinal.consecutivo=consecutivo.value;
+    console.log(reporteFinal);
+    console.log(arrayEmpaquetadoFieldsetInterno);
+}
+
 selectNombreCliente.addEventListener("change",(event)=>{
         const clienteSeleccionado = listaClientes.find((i)=>{
             return i.id==parseInt(selectNombreCliente.value);
         })
-        console.log(selectNombreCliente.value);
-        console.log(clienteSeleccionado);
+        //console.log(selectNombreCliente.value);
+        //console.log(clienteSeleccionado.nombre);
         direccionCliente.value=clienteSeleccionado.direccion;
         numeroTelefono.value=clienteSeleccionado.numeroTelefonico;
     })
@@ -247,15 +304,17 @@ for (let par of configuracionFotos) {
     }
 }
 
+let arrayFieldsetInterno=[]
 //Escuchador para el envio del formulario
 formularioServicio.addEventListener("submit",(e)=>{
     e.preventDefault();
     //Funcion para obtener firmas en imagen
     obtenerFirmas64(firmaTecnico,firmaCliente,reportesFotograficos64)
+    
 
-    console.log(selectTipoServicio.value);
+    //console.log(selectTipoServicio.value);
     let arrayFieldset =[...formularioServicio.getElementsByClassName("contenedor-global")]
-    console.log(arrayFieldset);
+    //console.log(arrayFieldset);
     let valorElegido = parseInt(selectTipoServicio.value);
     let objetoEncontrado= secciones.find(v=> v.value === valorElegido);
     objetoEncontrado ? arrayFieldset.push(objetoEncontrado.seccion):console.error("error");
@@ -271,10 +330,11 @@ formularioServicio.addEventListener("submit",(e)=>{
     })
     if(formularioValido){
         console.log("¡Formulario 100% validado y listo para empaquetar!")
+        empaquetarDatos();
     }else{ 
         alert("Por favor llena todos los campos")
             
     }
-    console.log(reportesFotograficos64)
+    
    
 })
