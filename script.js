@@ -1,4 +1,5 @@
 //Variables
+const logoOverhaul="../Imagenes/logoOverhaul.png";
 const formularioServicio= document.getElementById("formularioDeServicio")
 const selectNombreCliente= document.getElementById("NombreCliente");
 const nombrePersonalCliente= document.getElementById("NombrePersona");
@@ -230,8 +231,41 @@ let reporteFinal={}
     reporteFinal.horaInicio=horaInicio.value;
     reporteFinal.horaFinalizacion=horaFinalizacion.value;
     reporteFinal.consecutivo=consecutivo.value;
-    console.log(reporteFinal);
-    console.log(arrayEmpaquetadoFieldsetInterno);
+    return reporteFinal;
+}
+
+function generarPDF(datosEmpaquetados){
+    let hojaDeTrabajo= new jspdf.jsPDF();
+    if (datosEmpaquetados.tipoServicio === "Mantenimiento Correctivo") {
+        dibujarFormatoCorrectivo(hojaDeTrabajo, datosEmpaquetados);
+    } else if (datosEmpaquetados.tipoServicio === "Mantenimiento Preventivo") {
+        dibujarFormatoPreventivo(hojaDeTrabajo, datosEmpaquetados);
+    }else if(datosEmpaquetados.tipoServicio === "Entrega de equipo"){
+        dibujarFormatoEntrega(hojaDeTrabajo, datosEmpaquetados);
+    }else{
+        dibujarFormatoRetiro(hojaDeTrabajo, datosEmpaquetados);
+    } 
+    hojaDeTrabajo.save("Hoja de trabajo.pdf");
+}
+
+function dibujarFormatoCorrectivo(documento,datos){
+    documento.text("Correctivo",20,30);
+}
+
+function dibujarFormatoPreventivo(documento,datos){
+    documento.setFontSize(10);
+    documento.rect(10,10,190,30,"S");
+    documento.addImage(logoOverhaul,"PNG",15,12,30,25);
+    documento.text(`Tipo de servicio : ${datos.tipoServicio}`,50,15);
+    documento.text(`Numero de hoja`,80,15)
+}
+
+function dibujarFormatoEntrega(documento,datos){
+    documento.text("Entrega",20,30);
+}
+
+function dibujarFormatoRetiro(documento,datos){
+    documento.text("Retiro",20,30);
 }
 
 selectNombreCliente.addEventListener("change",(event)=>{
@@ -269,6 +303,7 @@ botonAgregarInsumos.addEventListener("click",(event)=>{
             </tr>
     `);
 });
+
 
 //evento para activar las secciones
 selectTipoServicio.addEventListener("change",(event)=>{
@@ -330,7 +365,10 @@ formularioServicio.addEventListener("submit",(e)=>{
     })
     if(formularioValido){
         console.log("¡Formulario 100% validado y listo para empaquetar!")
-        empaquetarDatos();
+       
+        let paqueteFinal = empaquetarDatos();
+        generarPDF(paqueteFinal);
+
     }else{ 
         alert("Por favor llena todos los campos")
             
