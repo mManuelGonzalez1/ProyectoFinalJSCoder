@@ -249,15 +249,138 @@ function generarPDF(datosEmpaquetados){
 }
 
 function dibujarFormatoCorrectivo(documento,datos){
-    documento.text("Correctivo",20,30);
+     //Encabezdo inicio 
+    let padding1=62;
+    let padding2=152;
+    documento.setFontSize(10);
+    documento.rect(10,10,190,30,"S");
+    documento.addImage(logoOverhaul,"PNG",13,13,44,24);
+    documento.line(60,10,60,40);
+    documento.text(`Nombre cliente:${datos.nombreCliente}`,padding1,16)
+    documento.line(60,20,150,20);
+    documento.text(`Tipo de servicio:${datos.tipoServicio}`,padding1,26);
+    documento.line(60,30,150,30);
+    documento.text(`Ticket de servicio:`,padding1,36);
+    documento.line(150,10,150,40);
+    documento.text(`Hora inicio:${datos.horaInicio}`,padding2,16);
+    documento.line(150,20,200,20);
+    documento.text(`Hora fin:${datos.horaFinalizacion}`,padding2,26);
+    documento.line(150,30,200,30);
+    documento.text(`Numero de hoja:${datos.consecutivo}`,padding2,36)
+    //Encabezado final
+
+
+    //segunda parte encabezado incio
+    let paddingFila1=56;
+    let paddingFila2=72;
+    documento.rect(10,50,190,35,"S");
+    documento.line(10,65,200,65);
+    documento.line(50,50,50,85);
+    documento.line(90,50,90,85);
+    documento.line(130,50,130,85);
+    documento.line(170,50,170,85);
+    documento.text(`Nombre contacto:${datos.nombreRecibe}`,12,paddingFila1,{maxWidth:35});
+    documento.text(`Dirección:${datos.direccionCliente}`,12,paddingFila2,{maxWidth:35});
+    documento.text(`Ciudad:${datos.ciudad}`,52,paddingFila1);
+    documento.text(`Fecha:${datos.fecha}`,52,paddingFila2);
+    documento.text(`Marca Montacarga:${datos.marca}`,92,paddingFila1,{maxWidth:35});
+    documento.text(`Modelo:${datos.modelo}`,92,paddingFila2);
+    documento.text(`Serie:${datos.serie}`,132,paddingFila1);
+    documento.text(`Año:${datos.añoFabricacion}`,132,paddingFila2);
+    documento.text(`Bodega:${datos.numeroBodega}`,172,paddingFila1,{maxWidth:25});
+    documento.text(`Horometro:${datos.horometro}`,172,paddingFila2,{maxWidth:25});
 }
 
 function dibujarFormatoPreventivo(documento,datos){
+     //Encabezdo inicio 
+    let padding1=62;
+    let padding2=152;
     documento.setFontSize(10);
     documento.rect(10,10,190,30,"S");
-    documento.addImage(logoOverhaul,"PNG",15,12,30,25);
-    documento.text(`Tipo de servicio : ${datos.tipoServicio}`,50,15);
-    documento.text(`Numero de hoja`,80,15)
+    documento.addImage(logoOverhaul,"PNG",13,13,44,24);
+    documento.line(60,10,60,40);
+    documento.text(`Nombre cliente:${datos.nombreCliente}`,padding1,16)
+    documento.line(60,20,150,20);
+    documento.text(`Tipo de servicio:${datos.tipoServicio}`,padding1,26);
+    documento.line(60,30,150,30);
+    documento.text(`Ticket de servicio:`,padding1,36);
+    documento.line(150,10,150,40);
+    documento.text(`Hora inicio:${datos.horaInicio}`,padding2,16);
+    documento.line(150,20,200,20);
+    documento.text(`Hora fin:${datos.horaFinalizacion}`,padding2,26);
+    documento.line(150,30,200,30);
+    documento.text(`Numero de hoja:${datos.consecutivo}`,padding2,36)
+    //Encabezado final
+    
+    //segunda parte encabezado incio
+    let paddingFila1=56;
+    let paddingFila2=72;
+    documento.rect(10,50,190,35,"S");
+    documento.line(10,65,200,65);
+    documento.line(50,50,50,85);
+    documento.line(90,50,90,85);
+    documento.line(130,50,130,85);
+    documento.line(170,50,170,85);
+    documento.text(`Nombre contacto:${datos.nombreRecibe}`,12,paddingFila1,{maxWidth:35});
+    documento.text(`Dirección:${datos.direccionCliente}`,12,paddingFila2,{maxWidth:35});
+    documento.text(`Ciudad:${datos.ciudad}`,52,paddingFila1);
+    documento.text(`Fecha:${datos.fecha}`,52,paddingFila2);
+    documento.text(`Marca Montacarga:${datos.marca}`,92,paddingFila1,{maxWidth:35});
+    documento.text(`Modelo:${datos.modelo}`,92,paddingFila2);
+    documento.text(`Serie:${datos.serie}`,132,paddingFila1);
+    documento.text(`Año:${datos.añoFabricacion}`,132,paddingFila2);
+    documento.text(`Bodega:${datos.numeroBodega}`,172,paddingFila1,{maxWidth:25});
+    documento.text(`Horometro:${datos.horometro}`,172,paddingFila2,{maxWidth:25});
+
+    //Tabla preventivo
+    let y=101;
+    let coordY=105
+    let altura=10
+
+    let itemsInspeccion = [
+    { item: "Estado de la batería", estado: datos.estadoBateriaPreventivo},
+    { item: "Nivel de electrolito", estado: datos.estadoElectrolitoPreventivo},
+    { item: "Nivel de aceite hidraulico", estado: datos.nivelAceiteHidraulicoPreventivo},
+    { item: "Estado de aceite hidraulico", estado: datos.estadoAceiteHidraulicoPreventivo},
+    { item: "¿Fugas de aceite presentadas?", estado: datos.fugasAceite, obs: datos.observacionesFugas},
+    { item: "Estado de mangueras", estado: datos.estadoMangueras, obs: datos.observacionesMangueras},
+    { item: "Estado cilindros", estado: datos.estadoCilindros, obs: datos.observacionesCilindros},
+    { item: "Estado deslizadores de carro", estado: datos.estadoDeslizadores},
+    { item: "Estado de cadenas", estado: datos.estadoCadenas},
+    { item: "Estado de ruedas", estado: datos.estadoRuedas},
+    { item: "Estado de frenos", estado: datos.estadoFrenos},
+    { item: "Funcionamiento de horometro", estado: datos.funcionamientoHorometro},
+    { item: "Indicador de descarga", estado: datos.funcionamientoIndicadorDescarga},
+    { item: "Funcionamiento bocina", estado: datos.funcionamientoBocina},
+    { item: "Funcionamiento luces", estado: datos.funcionamientoLuces},
+    { item: "Funcionamiento Joystick", estado: datos.funcionamientoJoystick, obs: datos.observacionesJoystick},
+    { item: "Funcionamiento hombre muerto", estado: datos.funcionamientoHombreMuerto},
+    { item: "Funcionamiento paro de emergencia", estado: datos.funcionamientoParoEmergencia}
+];
+     let altoTabla=itemsInspeccion.length*altura
+    
+    documento.rect(10,95,190,10,"S");
+    documento.line(73,95,73,105);
+    documento.line(133,95,133,105);
+    documento.text(`Item a inspeccionar`,12,y);
+    documento.text(`Estado`,75,y);
+    documento.text("Observaciones",136,y);
+    documento.rect(10,105,190,altoTabla,"S");
+
+    documento.line(73,coordY,73,coordY+altoTabla);
+    documento.line(133,coordY,133,coordY+altoTabla);
+    
+    itemsInspeccion.forEach(item=>{  
+        documento.line(10,coordY,200,coordY);
+        documento.text(item.item,12,coordY+6);
+        documento.text(item.estado,75,coordY+6);
+        if(item.obs){
+            documento.text(item.obs,136,coordY+6,{maxWidth:60});
+        }
+        coordY+=altura;
+    })
+    documento.addPage();
+    
 }
 
 function dibujarFormatoEntrega(documento,datos){
