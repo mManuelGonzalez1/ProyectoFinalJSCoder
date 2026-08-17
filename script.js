@@ -16,6 +16,7 @@ const nombreTecnico= document.getElementById("nombreTecnico");
 const nombreRecibe= document.getElementById("nombreRecibe");
 const firmaTecnico = document.getElementById("firmaTecnico");
 const firmaCliente= document.getElementById("firmaRecibe");
+
 // Datos del equipo y tiempos (seleccionados por Id)
 const marca = document.getElementById("Marca");
 const modelo = document.getElementById("Modelo");
@@ -195,7 +196,30 @@ function extraerTextoSelect(elementoSelect) {
     return elementoSelect.options[elementoSelect.selectedIndex].textContent;
 }
 
+
+function empaquetarArrayInsumos(){
+    const filaInsumos= document.querySelectorAll(".fila-insumo");
+    let arrayInsumosMto=[];
+    //forEach para atrapar cada fila de insumos
+    filaInsumos.forEach((fila)=>{
+        let insumoTemporal = {}; // Creamos un objeto vacío solo para esta fila
+        // 3. Buscamos los elementos DENTRO de esta fila usando sus clases
+        let selectNombre = fila.querySelector(".insumo");
+        let inputCantidad = fila.querySelector(".cantidad");
+        let selectMedida = fila.querySelector(".Medidainsumo");
+        
+        insumoTemporal.nombre=extraerTextoSelect(selectNombre);
+        insumoTemporal.cantidad=inputCantidad.value;
+        insumoTemporal.medida=extraerTextoSelect(selectMedida);
+        
+        arrayInsumosMto.push(insumoTemporal);
+    })
+    return arrayInsumosMto;
+}
+
+
 function empaquetarDatos(){
+let arrayInsumos=empaquetarArrayInsumos()
 let arrayEmpaquetadoFieldsetInterno=[]
 let reporteFinal={}
     for(let seccion of secciones){
@@ -231,6 +255,7 @@ let reporteFinal={}
     reporteFinal.horaInicio=horaInicio.value;
     reporteFinal.horaFinalizacion=horaFinalizacion.value;
     reporteFinal.consecutivo=consecutivo.value;
+    reporteFinal.insumos=arrayInsumos;
     return reporteFinal;
 }
 
@@ -380,6 +405,28 @@ function dibujarFormatoPreventivo(documento,datos){
         coordY+=altura;
     })
     documento.addPage();
+     y=16;
+     coordY=25
+     altura=10;
+     altoTabla=datos.insumos.length*altura
+    //Tabla insumos(Encabezado)
+    documento.rect(10,10,70,altura,"S");
+    documento.line(40,10,40,20);
+    documento.line(60,10,60,20);
+    documento.text(`Insumo`,12,y);
+    documento.text(`Cantidad`,42,y);
+    documento.text(`Medida`,62,y);
+    //Tabla insumos(Cuerpo)
+    documento.rect(10,20,70,altoTabla,"S")
+    documento.line(40,20,40,coordY+altoTabla)
+    documento.line(60,20,60,coordY+altoTabla)
+    datos.insumos.forEach(insumo=>{
+        documento.line(10,coordY+altura,80,coordY+altura);
+        documento.text(insumo.nombre,12,coordY+6,{maxWidth:20});
+        documento.text(insumo.cantidad,42,coordY+6);
+        documento.text(insumo.medida,62,coordY+6);
+        coordY+=altura
+    })
     
 }
 
@@ -425,6 +472,7 @@ botonAgregarInsumos.addEventListener("click",(event)=>{
                 </td>
             </tr>
     `);
+    
 });
 
 
@@ -490,6 +538,7 @@ formularioServicio.addEventListener("submit",(e)=>{
         console.log("¡Formulario 100% validado y listo para empaquetar!")
        
         let paqueteFinal = empaquetarDatos();
+        console.log(paqueteFinal);
         generarPDF(paqueteFinal);
 
     }else{ 
