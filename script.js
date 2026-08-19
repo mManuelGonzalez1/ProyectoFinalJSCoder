@@ -316,8 +316,23 @@ function dibujarEncabezadoGlobal(documento,datos){
     return 95;
 }
 
-function dibujarObservacionesPendientesFirmas(documento,datos,coordY){
+function dibujarObservacionesPendientesFirmas(documento,datos,Y){
+    let yInicialEncabeObs=Y+10;
+    let alturaEncabeObs=10;
+    let alturaEncabePendi=10;
+    let alturaObs=30;
+    let yInicialObs=yInicialEncabeObs+alturaEncabeObs+5;
+    let yInicialEncabePendi=yInicialObs+alturaObs;
+    let yInicialPendi=yInicialEncabePendi+alturaEncabePendi+5;
 
+    documento.rect(10,yInicialEncabeObs,190,alturaEncabeObs,"S");
+    documento.text("Trabajo realizado",12,yInicialEncabeObs+6);
+    documento.rect(10,yInicialObs,190,alturaObs,"S");
+    documento.text(datos.observaciones,12,yInicialObs+6,{maxWidth:170});
+    documento.rect(10,yInicialEncabePendi,190,alturaEncabePendi,"S");
+    documento.text("Pendientes",12,yInicialEncabePendi+6);
+    documento.rect(10,yInicialPendi,190,alturaObs);
+    documento.text(datos.pendientes,12,yInicialPendi+6,{maxWidth:170});
 }
 
 function dibujarFormatoCorrectivo(documento,datos){
@@ -326,9 +341,9 @@ function dibujarFormatoCorrectivo(documento,datos){
 
 function dibujarFormatoPreventivo(documento,datos){
     //Tabla preventivo
-    let coordenadaYinicio=dibujarEncabezadoGlobal(documento,datos)
-    let coordY=105
-    let altura=10
+    let coordenadaYinicio=dibujarEncabezadoGlobal(documento,datos) //95
+    let puntoYiniciotablaInspeccion=105
+    let alturaCasilla=10
 
     let itemsInspeccion = [
     { item: "Estado de la batería", estado: datos.estadoBateriaPreventivo},
@@ -350,7 +365,7 @@ function dibujarFormatoPreventivo(documento,datos){
     { item: "Funcionamiento hombre muerto", estado: datos.funcionamientoHombreMuerto},
     { item: "Funcionamiento paro de emergencia", estado: datos.funcionamientoParoEmergencia}
 ];
-     let altoTabla=itemsInspeccion.length*altura
+     let altoTabla=itemsInspeccion.length*alturaCasilla
     
     documento.rect(10,coordenadaYinicio,190,10,"S");
     documento.line(73,coordenadaYinicio,73,105);
@@ -360,42 +375,42 @@ function dibujarFormatoPreventivo(documento,datos){
     documento.text("Observaciones",136,coordenadaYinicio+6);
     documento.rect(10,coordenadaYinicio+10,190,altoTabla,"S");
 
-    documento.line(73,coordY,73,coordY+altoTabla);
-    documento.line(133,coordY,133,coordY+altoTabla);
+    documento.line(73,puntoYiniciotablaInspeccion,73,puntoYiniciotablaInspeccion+altoTabla);
+    documento.line(133,puntoYiniciotablaInspeccion,133,puntoYiniciotablaInspeccion+altoTabla);
     
     itemsInspeccion.forEach(item=>{  
-        documento.line(10,coordY,200,coordY);
-        documento.text(item.item,12,coordY+6);
-        documento.text(item.estado,75,coordY+6);
+        documento.line(10,puntoYiniciotablaInspeccion,200,puntoYiniciotablaInspeccion);
+        documento.text(item.item,12,puntoYiniciotablaInspeccion+6);
+        documento.text(item.estado,75,puntoYiniciotablaInspeccion+6);
         if(item.obs){
-            documento.text(item.obs,136,coordY+6,{maxWidth:60});
+            documento.text(item.obs,136,puntoYiniciotablaInspeccion+6,{maxWidth:60});
         }
-        coordY+=altura;
+        puntoYiniciotablaInspeccion+=alturaCasilla;
     })
     documento.addPage();
-     let y=16;
-     coordY=20
-     altura=10;
-     altoTabla=datos.insumos.length*altura
+     let puntoYinicioEncabezadoInsumos=10;
+     let puntoYinicioCuerpoInsumos=20
+     //alturaCasilla=10;
+     let altoTablaInsumos=datos.insumos.length*alturaCasilla
     //Tabla insumos(Encabezado)
-    documento.rect(10,10,70,altura,"S");
-    documento.line(40,10,40,20);
-    documento.line(60,10,60,20);
-    documento.text(`Insumo`,12,y);
-    documento.text(`Cantidad`,42,y);
-    documento.text(`Medida`,62,y);
+    documento.rect(10,puntoYinicioEncabezadoInsumos,70,alturaCasilla,"S");
+    documento.line(40,puntoYinicioEncabezadoInsumos,40,20);
+    documento.line(60,puntoYinicioEncabezadoInsumos,60,20);
+    documento.text(`Insumo`,12,puntoYinicioEncabezadoInsumos+6);
+    documento.text(`Cantidad`,42,puntoYinicioEncabezadoInsumos+6);
+    documento.text(`Medida`,62,puntoYinicioEncabezadoInsumos+6);
     //Tabla insumos(Cuerpo)
-    documento.rect(10,coordY,70,altoTabla,"S")
-    documento.line(40,coordY,40,coordY+altoTabla)
-    documento.line(60,coordY,60,coordY+altoTabla)
+    documento.rect(10,puntoYinicioCuerpoInsumos,70,altoTablaInsumos,"S")
+    documento.line(40,puntoYinicioCuerpoInsumos,40,puntoYinicioCuerpoInsumos+altoTablaInsumos)
+    documento.line(60,puntoYinicioCuerpoInsumos,60,puntoYinicioCuerpoInsumos+altoTablaInsumos)
     datos.insumos.forEach(insumo=>{
-        documento.line(10,coordY+altura,80,coordY+altura);
-        documento.text(insumo.nombre,12,coordY+6,{maxWidth:20});
-        documento.text(insumo.cantidad,42,coordY+6);
-        documento.text(insumo.medida,62,coordY+6);
-        coordY+=altura
+        documento.line(10,puntoYinicioCuerpoInsumos+alturaCasilla,80,puntoYinicioCuerpoInsumos+alturaCasilla);
+        documento.text(insumo.nombre,12,puntoYinicioCuerpoInsumos+6,{maxWidth:20});
+        documento.text(insumo.cantidad,42,puntoYinicioCuerpoInsumos+6);
+        documento.text(insumo.medida,62,puntoYinicioCuerpoInsumos+6);
+        puntoYinicioCuerpoInsumos+=alturaCasilla
     })
-    dibujarObservacionesPendientesFirmas(documento,datos,coordY);
+    dibujarObservacionesPendientesFirmas(documento,datos,puntoYinicioCuerpoInsumos);
     //Seccion observaciones y firmas
 }
 
