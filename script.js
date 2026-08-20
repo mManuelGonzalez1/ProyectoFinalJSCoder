@@ -264,6 +264,9 @@ function generarPDF(datosEmpaquetados) {
   } else {
     dibujarFormatoRetiro(hojaDeTrabajo, datosEmpaquetados);
   }
+  if (Object.keys(datosEmpaquetados.evidenciaGrafica).length > 0) {
+    dibujarFotos(hojaDeTrabajo, datosEmpaquetados);
+  }
   hojaDeTrabajo.save("Hoja de trabajo.pdf");
 }
 
@@ -375,9 +378,47 @@ function dibujarFirmas(documento, datos, yInicialFirmas) {
     alturaFirma,
   );
 }
+function dibujarFotos(documento, datos) {
+  let alturaImagenes = 25;
+  let yIncioFotos = 30;
+  let margenInicioFotos = 10;
+
+  //let altoDocumento =Object.keys(datos.evidenciaGrafica).length * alturaImagenes;
+  documento.addPage();
+  documento.rect(10, 10, 190, 10, "S");
+  documento.text(`Anexos Fotográficos`, 12, 16);
+  for (let seccion in datos.evidenciaGrafica) {
+    if (
+      datos.evidenciaGrafica[seccion].length > 0 &&
+      seccion !== "FirmaTecnico" &&
+      seccion !== "FirmaCliente"
+    ) {
+      datos.evidenciaGrafica[seccion].forEach((foto, indice) => {
+        documento.addImage(
+          foto,
+          "PNG",
+          margenInicioFotos,
+          yIncioFotos,
+          25,
+          alturaImagenes,
+        );
+        margenInicioFotos += 30;
+      });
+      yIncioFotos += alturaImagenes;
+      margenInicioFotos = 10;
+    }
+  }
+}
 
 function dibujarFormatoCorrectivo(documento, datos) {
   let coordenadaYinicio = dibujarEncabezadoGlobal(documento, datos);
+
+  let coordenadaInicialYfirmas = dibujarObservacionesPendientes(
+    documento,
+    datos,
+    coordenadaYinicio,
+  );
+  dibujarFirmas(documento, datos, coordenadaInicialYfirmas);
 }
 
 function dibujarFormatoPreventivo(documento, datos) {
