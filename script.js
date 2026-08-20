@@ -325,9 +325,9 @@ function dibujarObservacionesPendientes(documento, datos, Y) {
   let alturaEncabeObs = 10;
   let alturaEncabePendi = 10;
   let alturaObs = 30;
-  let yInicialObs = yInicialEncabeObs + alturaEncabeObs + 5;
-  let yInicialEncabePendi = yInicialObs + alturaObs;
-  let yInicialPendi = yInicialEncabePendi + alturaEncabePendi + 5;
+  let yInicialObs = yInicialEncabeObs + alturaEncabeObs;
+  let yInicialEncabePendi = yInicialObs + alturaObs + 5;
+  let yInicialPendi = yInicialEncabePendi + alturaEncabePendi;
   let yInicialFirmas = yInicialPendi + alturaObs;
 
   documento.rect(10, yInicialEncabeObs, 190, alturaEncabeObs, "S");
@@ -342,22 +342,38 @@ function dibujarObservacionesPendientes(documento, datos, Y) {
   return yInicialFirmas;
 }
 
-function dibujarFirmas(documento, datos, yIncialFirmas) {
-  let posicionYinicialFirmas = yIncialFirmas + 20;
+function dibujarFirmas(documento, datos, yInicialFirmas) {
+  let posicionYinicialFirmas = yInicialFirmas + 50;
+  let alturaFirma = 28;
   documento.line(10, posicionYinicialFirmas, 80, posicionYinicialFirmas);
-  documento.text(datos.nombreTecnico, 10, posicionYinicialFirmas + 3);
+  documento.text(
+    `Nombre tecnico:${datos.nombreTecnico}`,
+    12,
+    posicionYinicialFirmas + 5,
+  );
   documento.line(100, posicionYinicialFirmas, 180, posicionYinicialFirmas);
-  documento.text(datos.nombreRecibe, 100, posicionYinicialFirmas + 3);
+  documento.text(
+    `Nombre cliente: ${datos.nombreRecibe}`,
+    102,
+    posicionYinicialFirmas + 5,
+  );
   //documento.addImage(imagen, formato, x, y, ancho, alto).
-  //documento.addImage(datos.evidenciaGrafica.FirmaTecnico, "PNG", 10, 0, 70, 30);
-  //documento.addImage(
-  //datos.evidenciaGrafica.FirmaCliente,
-  //"PNG",
-  //100,
-  //70,
-  //70,
-  //30,
-  //);
+  documento.addImage(
+    datos.evidenciaGrafica.FirmaTecnico,
+    "PNG",
+    12,
+    posicionYinicialFirmas - alturaFirma,
+    70,
+    alturaFirma,
+  );
+  documento.addImage(
+    datos.evidenciaGrafica.FirmaCliente,
+    "PNG",
+    100,
+    posicionYinicialFirmas - alturaFirma,
+    70,
+    alturaFirma,
+  );
 }
 
 function dibujarFormatoCorrectivo(documento, datos) {
