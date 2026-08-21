@@ -394,6 +394,15 @@ function dibujarFotos(documento, datos) {
       seccion !== "FirmaCliente"
     ) {
       datos.evidenciaGrafica[seccion].forEach((foto, indice) => {
+        if (margenInicioFotos >= 170) {
+          margenInicioFotos = 10;
+          yIncioFotos += alturaImagenes + 5;
+        }
+        if (yIncioFotos >= 260) {
+          documento.addPage();
+          yIncioFotos = 20;
+          margenInicioFotos = 10;
+        }
         documento.addImage(
           foto,
           "PNG",
@@ -650,7 +659,6 @@ for (let par of configuracionFotos) {
   }
 }
 
-let arrayFieldsetInterno = [];
 //Escuchador para el envio del formulario
 formularioServicio.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -681,10 +689,15 @@ formularioServicio.addEventListener("submit", (e) => {
   });
   if (formularioValido) {
     console.log("¡Formulario 100% validado y listo para empaquetar!");
-
     let paqueteFinal = empaquetarDatos();
-    console.log(paqueteFinal);
     generarPDF(paqueteFinal);
+    reportesFotograficos64 = {};
+    formularioServicio.reset();
+    configuracionFotos.forEach((elemento) => {
+      elemento.contenedor.innerHTML = "";
+    });
+    eliminarTrazo(ctxCliente, firmaCliente);
+    eliminarTrazo(ctxTecnico, firmaTecnico);
   } else {
     alert("Por favor llena todos los campos");
   }
